@@ -18,14 +18,9 @@
 
 <!-- HASTANIN INR RECORDLARI -->
 <% @inr_records.each do |ir| %>
-<p> <%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> </p>
+<p> 
+	<%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> 
+	<%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %> 
+</p>
 <% end %>
 <!-- HASTANIN INR RECORDLARI -->
-
-
-<script>
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    startDate: '-3d'
-});
-</script>

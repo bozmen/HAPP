@@ -56,6 +56,7 @@ class DoctorsController < ApplicationController
 	# GET 'doctors/:id/monitor_patient/:patient_id'
 	def monitor_patient
 		@patient = Patient.find(params[:patient_id])
+		@drug = DrugPrescription.new
 	end
 
 	private

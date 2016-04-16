@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20160416142127) do
   end
 
   create_table "drug_prescriptions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.date     "date"
-    t.integer  "dosage"
+    t.decimal  "dosage",     precision: 3, scale: 1
     t.integer  "patient_id"
   end
 

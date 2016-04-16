@@ -15,6 +15,9 @@ class InrRecordsController < ApplicationController
 	end
 
 	def destroy
+		inr = InrRecord.find(params[:inr_id])
+		inr.destroy
+		redirect_to current_user
 	end
 
 	private

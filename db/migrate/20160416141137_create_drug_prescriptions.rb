@@ -4,7 +4,7 @@ class CreateDrugPrescriptions < ActiveRecord::Migration
 
       t.timestamps null: false
       t.date :date
-      t.integer  :dosage
+      t.decimal  :dosage, precision: 3, scale: 1
       t.integer  :patient_id
     end
   end
