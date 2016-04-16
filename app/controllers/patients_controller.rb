@@ -1,5 +1,9 @@
 class PatientsController < ApplicationController
+	include SessionsHelper
+
 	def show
+		@inr = InrRecord.new
+		@inr_records = current_user.inr_records
 	end
 
 	def new
@@ -16,16 +20,28 @@ class PatientsController < ApplicationController
 	end
 
 	def edit
+		@patient = current_user
 	end
 
 	def destroy
 	end
 
 	def update
+		@patient = current_user
+		if  @patient.update_attributes(update_params)
+	    	redirect_to edit_patient_path
+	    else 
+	    	redirect_to edit_patient_path
+	    end
 	end
 
 	private
 	def signup_params
 		params.require(:patient).permit(:name, :surname, :email, :password, :password_confirmation)
+	end
+
+	private
+	def update_params
+		params.require(:patient).permit(:name, :surname, :email, :birthday, :password, :password_confirmation)
 	end
 end

@@ -1,0 +1,14 @@
+<%= @patient.name %>
+
+<!-- PATIENTS OF DOCTOR -->
+<% current_user.patients.each do |p| %>
+	<%= link_to p.name, monitor_patient_path(current_user, p) %> 
+<% end %>
+<!-- PATIENTS OF DOCTOR -->
+
+<!-- PATIENT INR RECORDS -->
+<% @patient.inr_records.each do |ir| %>
+	<p> <%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> </p>
+<% end %>
+<!-- PATIENT INR RECORDS -->
+

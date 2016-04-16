@@ -1,6 +1,7 @@
 <div style="width: 80%; margin: auto" class="row">
 <div id="calendar" class="col-md-2" align="center">
 
+
 	HASTA LISTESI
 </table>
 </div>	
@@ -27,3 +28,15 @@
 	<% end %>
 </div>
 </div>
+
+<%= link_to "Log Out", logout_path, method: "delete" %> 
+
+Hasta ekle:
+<%= form_for(:patient, url: add_patient_path) do |f| %>
+	<%= f.text_field :email %>
+	<%= f.submit "Add patient" %>
+<% end %>
+
+<% current_user.patients.each do |p| %>
+	<%= link_to p.name, monitor_patient_path(current_user, p) %> 
+<% end %>

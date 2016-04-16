@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416105841) do
+ActiveRecord::Schema.define(version: 20160416142127) do
 
   create_table "doctors", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20160416105841) do
     t.string   "email"
   end
 
+  create_table "drug_prescriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date     "date"
+    t.integer  "dosage"
+    t.integer  "patient_id"
+  end
+
+  create_table "inr_records", force: :cascade do |t|
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.date     "date"
+    t.decimal  "inr_value",  precision: 3, scale: 1
+    t.integer  "patient_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -30,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160416105841) do
     t.string   "password_digest"
     t.string   "birthdate"
     t.string   "email"
+    t.integer  "doctor_id"
   end
 
 end

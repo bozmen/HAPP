@@ -1,1 +1,33 @@
 <%= current_user.name %>
+
+
+<%= link_to "Log Out", logout_path, method: "delete" %> 
+
+
+<!-- HASTA INR EKLEME ŞEYSİ -->
+<p>Add INR Record</p>
+<%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
+	<%= f.label :inr_value %>
+	<%= f.number_field :inr_value, :step => '0.1' %>
+
+	<%= f.label :date %>
+	<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
+
+	<%= f.submit "Add INR Record" %>
+<% end %>
+<!-- HASTA INR EKLEME ŞEYSİ -->
+
+<!-- HASTANIN INR RECORDLARI -->
+<% @inr_records.each do |ir| %>
+<p> <%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> </p>
+<% end %>
+<!-- HASTANIN INR RECORDLARI -->
+
+
+<script>
+$('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    startDate: '-3d'
+});
+</script>
+
