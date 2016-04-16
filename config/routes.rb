@@ -12,11 +12,13 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  get 'patients/login' => 'patient_session#new',    as: :patient_login
+  get    'patients/login' => 'patient_session#new',                   as: :patient_login
+  post   'patients/:id/create_inr' => 'inr_records#create',           as: :create_inr
+  delete 'patients/:id/delete_inr/:inr_in' => 'inr_records#destroy',  as: :destroy_inr
+
 
   get  'doctors/login'           => 'doctor_session#new',     as: :doctor_login
   post 'doctors/:id/add_patient' => 'doctors#add_patient',    as: :add_patient
-
   get  'doctors/:id/monitor_patient/:patient_id' =>  'doctors#monitor_patient',   as: :monitor_patient
 
   post   'login'         => 'sessions#create',      as: :login

@@ -2,6 +2,8 @@ class PatientsController < ApplicationController
 	include SessionsHelper
 
 	def show
+		@inr = InrRecord.new
+		@inr_records = current_user.inr_records
 	end
 
 	def new

@@ -3,7 +3,7 @@ class CreateDrugPrescriptions < ActiveRecord::Migration
     create_table :drug_prescriptions do |t|
 
       t.timestamps null: false
-      t.datetime :date
+      t.date :date
       t.integer  :dosage
       t.integer  :patient_id
     end

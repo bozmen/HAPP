@@ -25,16 +25,16 @@ ActiveRecord::Schema.define(version: 20160416142127) do
   create_table "drug_prescriptions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date"
+    t.date     "date"
     t.integer  "dosage"
     t.integer  "patient_id"
   end
 
   create_table "inr_records", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "date"
-    t.datetime "value"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.date     "date"
+    t.decimal  "inr_value",  precision: 3, scale: 1
     t.integer  "patient_id"
   end
 

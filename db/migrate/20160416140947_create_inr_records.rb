@@ -3,8 +3,8 @@ class CreateInrRecords < ActiveRecord::Migration
     create_table :inr_records do |t|
 
       t.timestamps null: false
-      t.datetime :date
-      t.datetime :value
+      t.date :date
+      t.decimal  :inr_value, precision: 3, scale: 1
       t.integer  :patient_id
     end
   end
