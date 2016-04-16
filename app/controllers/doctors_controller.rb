@@ -1,5 +1,7 @@
 class DoctorsController < ApplicationController
 	def show
+		@articles = Patient.all
+		@date = params[:month] ? Date.parse(params[:month].gsub('-', '/')) : Date.today
 	end
 
 	def new
