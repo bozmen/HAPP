@@ -56,6 +56,8 @@ class DoctorsController < ApplicationController
 	# GET 'doctors/:id/monitor_patient/:patient_id'
 	def monitor_patient
 		@patient = Patient.find(params[:patient_id])
+		@drug_prescriptions = @patient.drug_prescriptions
+		@date = params[:month] ? Date.parse(params[:month].gsub('-', '/')) : Date.today
 		@drug = DrugPrescription.new
 	end
 

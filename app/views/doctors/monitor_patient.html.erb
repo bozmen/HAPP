@@ -1,15 +1,35 @@
-<!-- PATIENTS OF DOCTOR -->
-<% current_user.patients.each do |p| %>
-	<%= link_to p.name, monitor_patient_path(current_user, p) %> 
-<% end %>
-<!-- PATIENTS OF DOCTOR -->
 
-<!-- PATIENT INR RECORDS -->
-<% @patient.inr_records.each do |ir| %>
-	<p> <%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> </p>
-<% end %>
-<!-- PATIENT INR RECORDS -->
+<div style="width: 80%; margin: auto" class="row">
+	<div id="calendar" class="col-md-2" align="center">
+	<!-- PATIENTS OF DOCTOR -->
+	<% current_user.patients.each do |p| %>
+		<%= link_to p.name, monitor_patient_path(current_user, p) %> 
+	<% end %>
+	<!-- PATIENTS OF DOCTOR -->
+	</table>
+</div>	
+<div id="calendar" class="col-md-5" align="center">
+	GRAFIK
+</div>
 
+<div id="calendar" class="col-md-5">
+	<h2 id="month">
+		<%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+		<%=h @date.strftime("%B %Y") %>
+		<%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+	</h2>
+	<%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
+	<%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+	<%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
+	<%= date.day %>
+	<ul>
+		<% for drug_prescription in drug_prescriptions %>
+		<li> <%= drug_prescription.dosage %> </li>
+		<% end %>
+	</ul>
+	<% end %>
+	<% end %>
+</div>
 <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
 <p>Add Prescription</p>
 <%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
@@ -24,7 +44,7 @@
 <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
 
 <!-- HASTA PRESCRIPTIONS -->
-<% @patient.drug_prescriptions.each do |dp| %>
+<% @drug_prescriptions.each do |dp| %>
 <p> 
 	<%= "Value: #{dp.dosage}  Date: #{dp.date}" %> 
 	<%= link_to "Delete", delete_prescription_path(current_user, dp), method: "delete" %> 

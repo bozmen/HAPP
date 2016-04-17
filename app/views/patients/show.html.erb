@@ -1,5 +1,6 @@
 <%= current_user.name %>
 
+
 <%= link_to "Log Out", logout_path, method: "delete" %> 
 
 
@@ -24,3 +25,11 @@
 </p>
 <% end %>
 <!-- HASTANIN INR RECORDLARI -->
+
+
+<script>
+$('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    startDate: '-3d'
+});
+</script>

@@ -1,13 +1,41 @@
-<%= current_user.name %>
+<div style="width: 80%; margin: auto" class="row">
+	<div id="calendar" class="col-md-2" align="center">
+
+
+		HASTA LISTESI
+	</table>
+</div>	
+<div id="calendar" class="col-md-5" align="center">
+	GRAFIK
+</div>
+
+<div id="calendar" class="col-md-5">
+	<h2 id="month">
+		<%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+		<%=h @date.strftime("%B %Y") %>
+		<%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+	</h2>
+	<%= calendar_for @articles, :year => @date.year, :month => @date.month do |calendar| %>
+	<%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+	<%= calendar.day(:day_method => :created_at) do |date,articles| %>
+	<%= date.day %>
+	<ul>
+		<% for article in articles %>
+		<li> <%= article.name %> </li>
+		<% end %>
+	</ul>
+	<% end %>
+	<% end %>
+</div>
 
 <%= link_to "Log Out", logout_path, method: "delete" %> 
 
 Hasta ekle:
 <%= form_for(:patient, url: add_patient_path) do |f| %>
-	<%= f.text_field :email %>
-	<%= f.submit "Add patient" %>
+<%= f.text_field :email %>
+<%= f.submit "Add patient" %>
 <% end %>
 
 <% current_user.patients.each do |p| %>
-	<%= link_to p.name, monitor_patient_path(current_user, p) %> 
+<%= link_to p.name, monitor_patient_path(current_user, p) %> 
 <% end %>

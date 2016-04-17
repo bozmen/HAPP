@@ -1,15 +1,21 @@
-<html lang="en">
-<head>BURASI HEAD</head>
-<body>
 <div class="container">
+	<div style="width: 80%; margin: 100px auto" class="row">
+		<div class="col-md-6" align = "center">
+          <%= image_tag("doctor.png", class:"img-circle", style:"background-color:white;")	%>
+          <h2>Doctors</h2>
+          <p>Doctors can login here!</p>
+          <p>
+          <%= link_to "Doctor Login", doctor_login_path, class:"btn btn-lg btn-primary", role:"button" %> 
+		  </p>
+        </div>
 
-	<div class="col-md-6" >
-		<%= link_to "Patient Login", patient_login_path %> 
-	</div>
-
-	<div class="col-md-6">
-		<%= link_to "Doctor Login", doctor_login_path %> 
+		<div class="col-md-6" align = "center">
+          <%= image_tag("patient.png", class:"img-circle", style:"background-color:white;")	%>
+          <h2>Patients</h2>
+          <p>Patients can login here!</p>
+          <p>
+          <%= link_to "Patient Login", patient_login_path, class:"btn btn-lg btn-success", role:"button" %> 
+		  </p>
+        </div>
 	</div>
 </div>
-</body>
-</html>
