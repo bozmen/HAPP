@@ -1,0 +1,61 @@
+<style>
+        #map {
+          width: 450px;
+          height: 300px;
+        }
+      </style>
+
+
+    <div class="container">
+
+<div class="row">
+	<div class="col-md-6" align="center">  
+		 <h1 >Contact us!</h1>
+     <div id="map" style="margin-top: 50px;"></div>
+      <script>
+        function initMap() {
+          var mapDiv = document.getElementById('map');
+          var map = new google.maps.Map(mapDiv, {
+            center: {lat: 39.8746147, lng: 32.7475962},
+            zoom: 16
+          });
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+
+      <p align="center">Bilkent University</p>
+      <p align="center">Çankaya/Ankara</p>
+      <p align="center">T: 123-456-7890</p>
+      <p align="center">F: 123-456-7890</p>
+      <p align="center">projecthealthapp@gmail.com</p>
+      </div>
+
+	<div class="col-md-6" align="center">  
+
+      <h1 align="center" >Meet Our Team</h1>
+       <div class="row" style="margin-top: 100px;">
+            <div class="col-md-3">
+               <img align="center" class="img-circle" src="/images/berkay.jpg" alt="Generic placeholder image" width="128" height="128">
+              <h4>Berkay Çakır</h4>
+              <p>Bilkent University CS/IV</p>
+            </div>
+            <div class="col-md-3">
+               <img align="center" class="img-circle" src="/images/burak.jpg" alt="Generic placeholder image" width="128" height="128">
+              <h4>Burak Özmen</h4>
+              <p>Bilkent University CS/IV</p>
+            </div>
+            <div class="col-md-3">
+               <img align="center" class="img-circle" src="/images/iso.jpg" alt="Generic placeholder image" width="128" height="128">
+              <h4>İsmail Can Dereli</h4>
+              <p>Bilkent University CS/IV</p>
+            </div>
+            <div class="col-md-3">
+               <img align="center" class="img-circle" src="/images/umut.jpg" alt="Generic placeholder image" width="128" height="128">
+              <h4>Umut Barış İşler</h4>
+              <p>Bilkent University CS/IV</p>
+            </div>
+        </div>
+      </div>
+</div>
+
+    </div> 
