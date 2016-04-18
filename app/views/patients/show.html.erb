@@ -1,10 +1,5 @@
-<%= current_user.name %>
 
 
-<%= link_to "Log Out", logout_path, method: "delete" %> 
-
-
-<!-- HASTA INR EKLEME ŞEYSİ -->
 <p>Add INR Record</p>
 <%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
 	<%= f.label :inr_value %>
