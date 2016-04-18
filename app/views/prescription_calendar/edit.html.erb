@@ -1,0 +1,66 @@
+<div class="container">
+ <div class="row">
+   <div id="calendar" class="col-md-2" align="center">
+      <!-- PATIENTS OF DOCTOR -->
+      <h3>Patient List </h3>
+      <table class="table table-hover">
+         <% current_user.patients.each do |p| %>
+         <tr>
+            <td class="user-list" style="text-transform: capitalize;">  <%= link_to p.name + " " + p.surname, monitor_patient_path(current_user, p) %>  </td>
+         </tr>
+         <% end %>
+      </table>
+      <!-- PATIENTS OF DOCTOR -->
+   </div>
+   <div id="calendar" class="col-md-5" align="center">
+      <h3> Grafik </h3>
+   </div>
+   <div id="calendar" class="col-md-5">
+      <h2 id="month">
+         <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+         <%=h @date.strftime("%B %Y") %>
+         <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+      </h2>
+      <%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
+      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+      <%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
+      <%= date.day %>
+      <ul>
+         <% for drug_prescription in drug_prescriptions %>
+         <%= form_for drug_prescription, url: update_prescription_path(current_user, drug_prescription) do |f| %>
+         <li> <%= f.number_field :dosage, :step => '0.5', :style => "width: 100%;" %> <%= f.submit "Update", class: "btn btn-default"%> </li>
+         <% end %>
+         <% end %>
+      </ul>
+      <% end %>
+      <% end %>
+   </div>
+   <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
+   <p>Add Prescription</p>
+   <%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
+   <%= f.label :dosage %>
+   <%= f.number_field :dosage, :step => '0.5' %>
+   <%= f.label :date %>
+   <%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
+   <%= f.submit "Add Drug Prescription", class: "btn btn-default" %>
+   <% end %>
+   <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
+   <!-- HASTA PRESCRIPTIONS -->
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>Value</th>
+            <th>Date</th>
+            <th></th>
+         </tr>
+      </thead>
+      <% @drug_prescriptions.each do |dp| %>
+      <tr>
+         <td>	<%= "#{dp.dosage} " %> </td>
+         <td><%= "#{dp.date}" %></td>
+         <td><%= link_to "Delete", delete_prescription_path(current_user, dp), method: "delete" %> </td>
+      </tr>
+      <% end %>
+   </table>
+   <!-- HASTA PRESCRIPTIONS -->
+</div>

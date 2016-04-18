@@ -3,18 +3,18 @@
 		<div class="col-md-6" align = "center">
           <%= image_tag("doctor.png", class:"img-circle", style:"background-color:white;")	%>
           <h2>Doctors</h2>
-          <p>Doctors can login here!</p>
           <p>
           <%= link_to "Doctor Login", doctor_login_path, class:"btn btn-lg btn-primary", role:"button" %> 
+           <p> <%= link_to "Create doctor account", new_doctor_path  %></p>
 		  </p>
         </div>
 
 		<div class="col-md-6" align = "center">
           <%= image_tag("patient.png", class:"img-circle", style:"background-color:white;")	%>
           <h2>Patients</h2>
-          <p>Patients can login here!</p>
           <p>
           <%= link_to "Patient Login", patient_login_path, class:"btn btn-lg btn-success", role:"button" %> 
+          <p> <%= link_to "Create patient account", new_patient_path  %></p>
 		  </p>
         </div>
 	</div>

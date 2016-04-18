@@ -1,55 +1,130 @@
+<style type="text/css">
+   .messages-scroll{
+    width: 100%;
+    height: 50px;
+    overflow: auto;
+   }
+</style>
 
-<div style="width: 80%; margin: auto" class="row">
-	<div id="calendar" class="col-md-2" align="center">
-	<!-- PATIENTS OF DOCTOR -->
-	<% current_user.patients.each do |p| %>
-		<%= link_to p.name, monitor_patient_path(current_user, p) %> 
-	<% end %>
-	<!-- PATIENTS OF DOCTOR -->
-	</table>
-</div>	
-<div id="calendar" class="col-md-5" align="center">
-	GRAFIK
+<div class="container">
+   <div class="row">
+      <div id="calendar" class="col-md-2" align="center">
+         <!-- PATIENTS OF DOCTOR -->
+         <h3>Patient List </h3>
+         <table class="table table-hover">
+            <% current_user.patients.each do |p| %>
+            <tr>
+               <td class="user-list" style="text-transform: capitalize;">  <%= link_to p.name + " " + p.surname, monitor_patient_path(current_user, p) %>  </td>
+            </tr>
+            <% end %>
+         </table>
+         <!-- PATIENTS OF DOCTOR -->
+      </div>
+      <div id="calendar" class="col-md-5" align="center">
+         <h3> Grafik </h3>
+      </div>
+      <div id="calendar" class="col-md-5">
+         <h2 id="month">
+            <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+            <%=h @date.strftime("%B %Y") %>
+            <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+         </h2>
+         <%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
+         <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+         <%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
+         <%= date.day %>
+         <ul>
+            <% for drug_prescription in drug_prescriptions %>
+            <li> <%= drug_prescription.dosage %> </li>
+            <% end %>
+         </ul>
+         <% end %>
+         <% end %>
+      </div>
+      <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
+      <div class="col-md-12">
+         <p>Add Prescription</p>
+         <%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
+         <%= f.label :dosage %>
+         <%= f.number_field :dosage, :step => '0.5', required: true %>
+         <%= f.label :date %>
+         <%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker', required: true %> 
+         <%= f.submit "Add Drug Prescription", class: "btn btn-default" %>
+         <% end %>
+         <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
+         <!-- takvim edit butonu -->
+         <%= link_to "Edit Calendar", edit_prescription_calendar_path(current_user, @patient) %>
+         <!-- takvim edit butonu -->
+         <!-- HASTA PRESCRIPTIONS -->
+      </div>
+      <div class="col-md-12">
+         <hr/>
+         <table class="table table-hover">
+            <thead>
+               <tr>
+                  <th>Value</th>
+                  <th>Date</th>
+                  <th></th>
+               </tr>
+            </thead>
+            <% @drug_prescriptions.each do |dp| %>
+            <tr>
+               <td>  <%= "#{dp.dosage} " %> </td>
+               <td><%= "#{dp.date}" %></td>
+               <td><%= link_to "Delete", delete_prescription_path(current_user, dp), method: "delete" %> </td>
+            </tr>
+            <% end %>
+         </table>
+      </div>
+      <!-- HASTA PRESCRIPTIONS -->
+      <!-- RECOMMENDATION -->
+      <div class="col-md-6">
+         <hr/>
+         <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+               <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab1default" data-toggle="tab">Recommendation</a></li>
+                  <li><a href="#tab2default" data-toggle="tab">Why?</a></li>
+               </ul>
+            </div>
+            <div class="panel-body">
+               <div class="tab-content">
+                  <div class="tab-pane fade active in" id="tab1default">Recommendation
+                     <button type="button" style="float: right;" class="btn btn-default">Apply</button>
+                  </div>
+                  <div class="tab-pane fade" id="tab2default">Because</div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- RECOMMENDATION -->
+      <!-- MESSAGES -->
+      <div class="col-md-6">
+         <hr/>
+         <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+               <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab1default" data-toggle="tab">Messages</a></li>
+               </ul>
+            </div>
+            <div class="panel-body" style="background-color: #FFF;">
+               <div class="tab-content">
+                  <div class="tab-pane fade active in messages-scroll" id="tab1default">Mesajlar
+                     Mesajlar
+                     <br/>
+                     Mesajlar
+                     Mesajlar
+                     <br/>
+                     Mesajlar
+                     Mesajlar
+                     <br/>
+                     Mesajlar
+                     Mesajlar
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- MESSAGES -->
+   </div>
 </div>
-
-<div id="calendar" class="col-md-5">
-	<h2 id="month">
-		<%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
-		<%=h @date.strftime("%B %Y") %>
-		<%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
-	</h2>
-	<%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
-	<%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
-	<%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
-	<%= date.day %>
-	<ul>
-		<% for drug_prescription in drug_prescriptions %>
-		<li> <%= drug_prescription.dosage %> </li>
-		<% end %>
-	</ul>
-	<% end %>
-	<% end %>
-</div>
-<!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-<p>Add Prescription</p>
-<%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
-	<%= f.label :dosage %>
-	<%= f.number_field :dosage, :step => '0.5' %>
-
-	<%= f.label :date %>
-	<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
-
-	<%= f.submit "Add Drug Prescription" %>
-<% end %>
-<!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-
-<!-- HASTA PRESCRIPTIONS -->
-<% @drug_prescriptions.each do |dp| %>
-<p> 
-	<%= "Value: #{dp.dosage}  Date: #{dp.date}" %> 
-	<%= link_to "Delete", delete_prescription_path(current_user, dp), method: "delete" %> 
-</p>
-<% end %>
-<!-- HASTA PRESCRIPTIONS -->
-
-

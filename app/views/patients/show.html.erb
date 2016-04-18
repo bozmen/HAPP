@@ -1,30 +1,41 @@
-
-
-<p>Add INR Record</p>
-<%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
-	<%= f.label :inr_value %>
-	<%= f.number_field :inr_value, :step => '0.1' %>
-
-	<%= f.label :date %>
-	<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
-
-	<%= f.submit "Add INR Record" %>
-<% end %>
-<!-- HASTA INR EKLEME ŞEYSİ -->
-
-<!-- HASTANIN INR RECORDLARI -->
-<% @inr_records.each do |ir| %>
-<p> 
-	<%= "Value: #{ir.inr_value}  Date: #{ir.date}" %> 
-	<%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %> 
-</p>
-<% end %>
-<!-- HASTANIN INR RECORDLARI -->
-
-
+<style type="text/css">
+   .form-control{
+   width: 29%;
+   display: inline-block;
+   }
+</style>
+<div class="container">
+   <p>Add INR Record</p>
+   <div class="row">
+      <div class="col-md-6">
+         <%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
+         <%= f.label :inr_value %>
+         <%= f.number_field :inr_value, :step => '0.1', class: "form-control" %>
+         <%= f.label :date %>
+         <%= f.text_field :date, 'data-provide': 'datepicker', class: 'form-control datepicker' %> 
+         <%= f.submit "Add INR Record", class: "btn btn-default", style: "margin-top: -4px;" %>
+         <% end %>
+         <table class="table table-hover">
+            <thead>
+               <tr>
+                  <th>Value</th>
+                  <th>Date</th>
+                  <th></th>
+               </tr>
+            </thead>
+            <% @inr_records.each do |ir| %>
+            <tr>
+               <td>	<%= "#{ir.inr_value} " %> </td>
+               <td><%= "#{ir.date}" %></td>
+               <td><%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %></td>
+            </tr>
+            <% end %>
+         </table>
+      </div>
+   </div>
+</div>
 <script>
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy',
-    startDate: '-3d'
-});
+   $('.datepicker').datepicker({
+       format: 'dd/mm/yyyy'
+   });
 </script>
