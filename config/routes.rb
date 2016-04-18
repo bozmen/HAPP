@@ -21,11 +21,13 @@ Rails.application.routes.draw do
   delete 'patients/:id/delete_inr/:inr_id' => 'inr_records#destroy',  as: :delete_inr
 
 
-  get  'doctors/login'           => 'doctor_session#new',     as: :doctor_login
-  post 'doctors/:id/add_patient' => 'doctors#add_patient',    as: :add_patient
-  get  'doctors/:id/monitor_patient/:patient_id'   =>  'doctors#monitor_patient',  as: :monitor_patient
-  post   'doctors/:id/add_prescription/:patient_id' =>  'drug_prescriptions#create', as: :create_prescription
-  delete 'doctors/:id/delete_prescription/:prescription_id'  =>  'drug_prescriptions#destroy', as: :delete_prescription
+  get     'doctors/login'           => 'doctor_session#new',     as: :doctor_login
+  post    'doctors/:id/add_patient' => 'doctors#add_patient',    as: :add_patient
+  get     'doctors/:id/monitor_patient/:patient_id'             =>  'doctors#monitor_patient',      as: :monitor_patient
+  get     'doctors/:id/edit_prescriptions/:patient_id'          =>  'prescription_calendar#edit',   as: :edit_prescription_calendar
+  patch   'doctors/:id/update_prescription/:prescription_id'    =>  'drug_prescriptions#update',    as: :update_prescription
+  post    'doctors/:id/add_prescription/:patient_id'            =>  'drug_prescriptions#create',    as: :create_prescription
+  delete  'doctors/:id/delete_prescription/:prescription_id'    =>  'drug_prescriptions#destroy',   as: :delete_prescription
 
   post   'login'         => 'sessions#create',      as: :login
   delete 'logout'         => 'sessions#destroy',    as: :logout

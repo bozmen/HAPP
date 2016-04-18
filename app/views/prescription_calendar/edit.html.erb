@@ -24,7 +24,9 @@
 	<%= date.day %>
 	<ul>
 		<% for drug_prescription in drug_prescriptions %>
-		<li> <%= drug_prescription.dosage %> </li>
+		<%= form_for drug_prescription, url: update_prescription_path(current_user, drug_prescription) do |f| %>
+			<li> <%= f.number_field :dosage, :step => '0.5' %> <%= f.submit "Update" %> </li>
+		<% end %>
 		<% end %>
 	</ul>
 	<% end %>
@@ -34,18 +36,14 @@
 <p>Add Prescription</p>
 <%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
 	<%= f.label :dosage %>
-	<%= f.number_field :dosage, :step => '0.5', required: true %>
+	<%= f.number_field :dosage, :step => '0.5' %>
 
 	<%= f.label :date %>
-	<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker', required: true %> 
+	<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
 
 	<%= f.submit "Add Drug Prescription" %>
 <% end %>
 <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-
-<!-- takvim edit butonu -->
-<%= link_to "Edit Calendar", edit_prescription_calendar_path(current_user, @patient) %>
-<!-- takvim edit butonu -->
 
 <!-- HASTA PRESCRIPTIONS -->
 <% @drug_prescriptions.each do |dp| %>
