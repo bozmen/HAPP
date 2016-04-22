@@ -8,6 +8,8 @@
          <table class="table table-hover">
             <% current_user.patients.each do |p| %>
             <tr>
+               <td style="width: 50px;">
+               <%= link_to image_tag("avatar.png", :style => "border-radius: 50%; height: 28px; width: 31px;" ), monitor_patient_path(current_user, p) %>
                <td><%= link_to p.name, monitor_patient_path(current_user, p) %> </td>
             </tr>
             <% end %>

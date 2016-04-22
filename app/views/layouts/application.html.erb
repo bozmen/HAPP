@@ -30,9 +30,9 @@
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <% if(current_user.name != nil) %>
-               <%= current_user.name[0,20] %> 
+                <%= image_tag("avatar.png",  :style => "border-radius: 50%; height: 28px; width: 31px;" )%> <%= current_user.name[0,20] %> 
                <% else %>
-               <%= current_user.name %> 
+               <%= image_tag("avatar.png",  :style => "border-radius: 50%; height: 28px; width: 31px;" )%> <%= current_user.name %> 
                <% end %>
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">

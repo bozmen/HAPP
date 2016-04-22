@@ -1,13 +1,21 @@
-<%= form_for @patient, url: set_init_patient_path(current_user, @patient) do |f| %>
-	<%= f.label :risk %>
-	<%= f.select :risk,  Patient.risks.keys.to_a, required: true, id: "risk-select" %>
+<div class="container">
+   <div class="row">
+   <div class="col-xs-12 col-sm-4"></div>
+	  <div class="col-xs-12 col-sm-4">
+			<%= form_for @patient, url: set_init_patient_path(current_user, @patient) do |f| %>
+				<label> Risk </label>
+				<%= f.select :risk,  Patient.risks.keys.to_a, required: true,  id: "risk-select"%>
 
-	<%= f.label :desired_inr %>
-	<%= f.select :desired_inr, Patient.desired_inrs.keys.to_a, required: true %>
+				<label> desired_inr </label>
+				<%= f.select :desired_inr, Patient.desired_inrs.keys.to_a, required: true, class: "form-control", :style => "width:100%;" %>
 
-	<%= f.label :initial_dose %>
-	<%= f.number_field :initial_dose, :step => '0.5', required: true %>
-	<p> Suggestion: <span id="suggestion"><em>larger than 5mg, smaller than 10mg</em></span>
+				<label class="sr-only"> desired_inr </label>
+				<%= f.number_field :initial_dose, :step => '0.5', required: true, class: "form-control"  %>
 
-	<%= f.submit "Init" %>
-<% end %>
+
+				<p> Suggestion: <span id="suggestion"><em>larger than 5mg, smaller than 10mg</em></span></p>
+				<%= f.submit "Init", class:"new-button btn btn-lg btn-primary btn-block" %>
+			<% end %>
+		</div>
+	</div>
+</div>
