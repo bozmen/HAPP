@@ -1,0 +1,13 @@
+<%= form_for @patient, url: set_init_patient_path(current_user, @patient) do |f| %>
+	<%= f.label :risk %>
+	<%= f.select :risk,  Patient.risks.keys.to_a, required: true, id: "risk-select" %>
+
+	<%= f.label :desired_inr %>
+	<%= f.select :desired_inr, Patient.desired_inrs.keys.to_a, required: true %>
+
+	<%= f.label :initial_dose %>
+	<%= f.number_field :initial_dose, :step => '0.5', required: true %>
+	<p> Suggestion: <span id="suggestion"><em>larger than 5mg, smaller than 10mg</em></span>
+
+	<%= f.submit "Init" %>
+<% end %>

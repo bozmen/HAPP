@@ -19,6 +19,21 @@ class PatientsController < ApplicationController
 		end
 	end
 
+	def init
+		@patient = Patient.find(params[:patient_id])
+	end
+
+	def set_init
+		@patient = Patient.find(params[:patient_id])
+		if @patient.update_attributes(init_params)
+			# success flash
+			redirect_to monitor_patient_path(current_user, @patient)
+		else
+			# fail flash
+			redirect_to init_patient_path(current_user, @patient)
+		end
+	end
+
 	def edit
 		@patient = current_user
 	end
@@ -43,5 +58,10 @@ class PatientsController < ApplicationController
 	private
 	def update_params
 		params.require(:patient).permit(:name, :surname, :email, :birthday, :password, :password_confirmation)
+	end
+
+	private
+	def init_params
+		params.require(:patient).permit(:risk, :desired_inr, :initial_dose)
 	end
 end

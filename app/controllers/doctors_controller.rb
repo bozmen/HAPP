@@ -1,4 +1,6 @@
 class DoctorsController < ApplicationController
+	before_action :require_init, only: :monitor_patient
+
 	def show
 	end
 

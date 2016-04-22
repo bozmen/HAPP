@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get     'doctors/login'           => 'doctor_session#new',     as: :doctor_login
   post    'doctors/:id/add_patient' => 'doctors#add_patient',    as: :add_patient
   get     'doctors/:id/monitor_patient/:patient_id'             =>  'doctors#monitor_patient',      as: :monitor_patient
+  get     'doctors/:id/initialize_patient/:patient_id'          =>  'patients#init',          as: :init_patient
+  patch   'doctors/:id/initialize_patient/:patient_id'          =>  'patients#set_init',            as: :set_init_patient
   get     'doctors/:id/edit_prescriptions/:patient_id'          =>  'prescription_calendar#edit',   as: :edit_prescription_calendar
   patch   'doctors/:id/update_prescription/:prescription_id'    =>  'drug_prescriptions#update',    as: :update_prescription
   post    'doctors/:id/add_prescription/:patient_id'            =>  'drug_prescriptions#create',    as: :create_prescription

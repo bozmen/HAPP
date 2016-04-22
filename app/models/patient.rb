@@ -1,6 +1,10 @@
 class Patient < ActiveRecord::Base
 	has_secure_password
 
+	enum risk: [:low, :high]
+	enum desired_inr: ["2.5-3.5", "2.0-3.0"]
+	enum therapy_state: [:daily, :weekly]
+
 	belongs_to :doctor
 
 	has_many :inr_records
