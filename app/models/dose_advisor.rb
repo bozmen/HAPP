@@ -1,5 +1,8 @@
 class DrugPrescription
 	def advise(patient, given_date = nil)
+		if(!patient.inr_records)
+			"Patient has to enter an INR record for start of the therapy."
+		end
 		inr = patient.inr_records.order(:date).last
 		date = given_date || inr.date
 		start_date = patient.inr_records.order(:date).first.date
