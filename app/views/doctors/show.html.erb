@@ -2,15 +2,16 @@
    <div class="row">
       <div class="col-md-4">
          <%= form_for(:patient, url: add_patient_path) do |f| %>
-         <%= f.text_field :email, class: "form-control", style: "display: inline-block; width:70%;" %>
+         <%= f.select :email, options_for_select(Patient.all.collect{|x| [x.fullname, x.email]}), {}, {required: true,  class: "selectpicker form-control", style: "display: inline-block!important; width:70%;"}%>
          <%= f.submit "Add patient", class: "btn btn-default", style: "margin-top: -4px;" %>
          <% end %>
-         <table class="table table-hover">
+         <table class="table table-hover user-list">
             <% current_user.patients.each do |p| %>
             <tr>
                <td style="width: 50px;">
                <%= link_to image_tag("avatar.png", :style => "border-radius: 50%; height: 28px; width: 31px;" ), monitor_patient_path(current_user, p) %>
-               <td><%= link_to p.name, monitor_patient_path(current_user, p) %> </td>
+               <td><%= link_to p.fullname, monitor_patient_path(current_user, p) %></td>
+               <td><%= link_to "Delete", remove_patient_path(current_user, p), method: "delete" %> </td>
             </tr>
             <% end %>
          </table>

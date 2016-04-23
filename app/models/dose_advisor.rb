@@ -7,7 +7,7 @@ class DoseAdvisor
 		date = patient.inr_records.order(:date).last.date
 		start_date = patient.inr_records.order(:date).first.date
 		day = (date - patient.inr_records.order(:date).first.date).to_i + 1
-		if(patient.therapy_state == "daily")
+		if(day <= 7)
 			if day < 3
 				return "Recommended dosage for #{date + 1} is #{patient.initial_dose}mg"
 			elsif day == 3
@@ -197,7 +197,7 @@ class DoseAdvisor
 					end
 				end
 			end
-		elsif (patient.therapy_state == "weekly")
+		else
 			week = day/7
 			week_start = start_date + ( 7 * week )
 			week_end   = week_start + 6

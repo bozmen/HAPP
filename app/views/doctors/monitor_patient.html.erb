@@ -8,23 +8,11 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="container">
 	<div class="row">
-		<div id="calendar" class="col-md-2" align="center">
-			<!-- PATIENTS OF DOCTOR -->
-			<h3>Patient List </h3>
-			<table class="table table-hover">
-				<% current_user.patients.each do |p| %>
-				<tr>
-					<td class="user-list" style="text-transform: capitalize;">  <%= link_to p.name + " " + p.surname, monitor_patient_path(current_user, p) %>  </td>
-				</tr>
-				<% end %>
-			</table>
-			<!-- PATIENTS OF DOCTOR -->
-		</div>
-		<div id="calendar" class="col-md-5" align="center">
+		<div class="col-md-6" align="center">
 			<h3> Grafik </h3>
 			<div id="chart_div" style="width: 100%; height: 500px;"></div>
 		</div>
-		<div id="calendar" class="col-md-5">
+		<div id="calendar" class="col-md-6">
 			<h2 id="month">
 				<%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
 				<%=h @date.strftime("%B %Y") %>

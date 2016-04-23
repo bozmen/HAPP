@@ -13,13 +13,14 @@ class SessionsController < ApplicationController
 	    	log_in user, type
 	    	redirect_to user
 	    else
+	    	flash[:danger] = "Login failed. Check your email/password and try again later."
 	    	render "#{type}_session/new"
 	    end
 	end
 
 	def destroy
 	    log_out if logged_in?
-	    flash[:success] = t('session.successloggedout')
+	    flash[:success] = "You have been logged out successfully."
 	    redirect_to root_url
   	end
 end

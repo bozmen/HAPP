@@ -1,6 +1,8 @@
 class Patient < ActiveRecord::Base
 	has_secure_password
 
+
+
 	enum risk: [:low, :high]
 	enum desired_inr: ["2.5-3.5", "2.0-3.0"]
 	enum therapy_state: [:daily, :weekly]
@@ -15,4 +17,8 @@ class Patient < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     allow_nil: true,
                     uniqueness: { case_sensitive: false }
+
+    def fullname
+    	return "#{name.capitalize} #{surname.capitalize}"
+    end
 end

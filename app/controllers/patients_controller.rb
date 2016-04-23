@@ -13,8 +13,9 @@ class PatientsController < ApplicationController
 	def create
 		@patient = Patient.new(signup_params)
 		if @patient.save
-			redirect_to :new_patient
+			redirect_to @patient
 		else
+			flash[:danger] = "Account could not be created."
 			render 'new'
 		end
 	end
@@ -27,9 +28,11 @@ class PatientsController < ApplicationController
 		@patient = Patient.find(params[:patient_id])
 		if @patient.update_attributes(init_params)
 			# success flash
+			flash[:success] = "Patient has successfully initiated." 
 			redirect_to monitor_patient_path(current_user, @patient)
 		else
 			# fail flash
+			flash[:danger] = "Patient could not be initiated."
 			redirect_to init_patient_path(current_user, @patient)
 		end
 	end
@@ -44,8 +47,10 @@ class PatientsController < ApplicationController
 	def update
 		@patient = current_user
 		if  @patient.update_attributes(update_params)
+			flash[:success] = "Your profile has been updated successfully."
 	    	redirect_to edit_patient_path
 	    else 
+	    	flash[:danger]  = "Your profile could not be updated."
 	    	redirect_to edit_patient_path
 	    end
 	end

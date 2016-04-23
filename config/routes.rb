@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get     'doctors/login'           => 'doctor_session#new',     as: :doctor_login
   post    'doctors/:id/add_patient' => 'doctors#add_patient',    as: :add_patient
+  delete  'doctors/:id/delete_patient/:patient_id' => 'doctors#delete_patient', as: :remove_patient
   get     'doctors/:id/monitor_patient/:patient_id'             =>  'doctors#monitor_patient',      as: :monitor_patient
   get     'doctors/:id/initialize_patient/:patient_id'          =>  'patients#init',          as: :init_patient
   patch   'doctors/:id/initialize_patient/:patient_id'          =>  'patients#set_init',            as: :set_init_patient

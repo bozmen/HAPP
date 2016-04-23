@@ -12,9 +12,10 @@ class DoctorsController < ApplicationController
 	# POST 'doctors'
 	def create
 		@doctor = Doctor.new(signup_params)
-		if @doctor.save
-			redirect_to :new_doctor
+		if @doctor.save 
+			redirect_to @doctor
 		else
+			flash[:danger] = "Account could not be created."
 			render 'new'
 		end
 	end
@@ -31,8 +32,10 @@ class DoctorsController < ApplicationController
 	def update
 		@doctor = current_user
 		if  @doctor.update_attributes(update_params)
+			flash[:success] = "Your profile has been updated successfully."
 	    	redirect_to edit_doctor_path
 	    else
+	    	flash[:danger] = "Your profile could not be updated."
 	    	redirect_to edit_doctor_path
 	    end
 	end
@@ -43,16 +46,25 @@ class DoctorsController < ApplicationController
 		if patient
 			if patient.doctor
 				# zaten bir doktoru var diye flash ver
+				flash[:danger] = "This patient is already assigned to a doctor."
 				redirect_to current_user
 			else
+				flash[:success] = "Patient is assigned to you successfully."
 				patient.doctor = current_user
 				patient.save
 				redirect_to current_user
 			end
 		else
-			# böyle bir hasta yok diye flash var
+			# böyle bir hasta yok diye 
 			redirect_to current_user
 		end
+	end
+
+	def delete_patient
+		patient = Patient.find(params[:patient_id])
+		@doctor = current_user
+		@doctor.patients.delete(patient)
+		redirect_to current_user
 	end
 
 	# GET 'doctors/:id/monitor_patient/:patient_id'

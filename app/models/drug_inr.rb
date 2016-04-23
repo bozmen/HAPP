@@ -1,10 +1,10 @@
 class DrugInr
 	def DrugInr.generate_array(patient)
-		d = patient.drug_prescriptions
-		i = patient.inr_records
+		d = patient.drug_prescriptions.order(:date)
+		i = patient.inr_records.order(:date)
 		results = []
 		results << ['Day', 'Dose',  'INR']
-		dates = (d.map(&:date) | i.map(&:date))
+		dates = (d.map(&:date) | i.map(&:date)).sort
 		dates.each do |date|
 			to_add = []
 			to_add[0] = date.strftime("%d/%m")

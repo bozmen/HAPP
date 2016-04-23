@@ -8,4 +8,8 @@ class Doctor < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     allow_nil: true,
                     uniqueness: { case_sensitive: false }
+
+    def fullname
+    	return "#{name.capitalize} #{surname.capitalize}"
+    end
 end
