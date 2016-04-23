@@ -1,4 +1,4 @@
-class DrugPrescription
+class DoseAdvisor
 	def advise(patient, given_date = nil)
 		inr = patient.inr_records.order(:date).last
 		date = given_date || inr.date
