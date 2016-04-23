@@ -5,7 +5,7 @@
 		overflow: auto;
 	}
 </style>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="container">
 	<div class="row">
 		<div id="calendar" class="col-md-2" align="center">
@@ -22,6 +22,7 @@
 		</div>
 		<div id="calendar" class="col-md-5" align="center">
 			<h3> Grafik </h3>
+			<div id="chart_div" style="width: 100%; height: 500px;"></div>
 		</div>
 		<div id="calendar" class="col-md-5">
 			<h2 id="month">
@@ -128,3 +129,34 @@
 		<!-- MESSAGES -->
 	</div>
 </div>
+
+
+<script>
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawVisualization);
+
+	function drawVisualization() {
+	// Some raw data (not necessarily accurate)
+	var data = google.visualization.arrayToDataTable(<%= DrugInr.generate_array(@patient) %>);
+
+	var options = {
+		title : 'Monthly Coffee Production by Country',
+		vAxes: { 0: {title: 'ilk', format: '#.#', maxValue: 20}, 1: {title: 'aq',format: '#.#', minValue: -1, baselineColor:"#CCCCCC"} },
+		hAxis: {title: 'Month'},
+		seriesType: 'bars',
+		bar: {
+			groupWidth: 2
+		},
+		series: {
+			0:{ type: "bars", targetAxisIndex: 0 },
+			1:{ type: 'line', targetAxisIndex: 1}
+
+		}
+};
+
+
+var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+chart.draw(data, options);
+}
+</script>
+
