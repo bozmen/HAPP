@@ -136,27 +136,28 @@
 	google.charts.setOnLoadCallback(drawVisualization);
 
 	function drawVisualization() {
-	// Some raw data (not necessarily accurate)
-	var data = google.visualization.arrayToDataTable(<%= DrugInr.generate_array(@patient) %>);
+// Some raw data (not necessarily accurate)
+var data = google.visualization.arrayToDataTable(<%= DrugInr.generate_array(@patient) %>);
 
-	var options = {
-		title : 'Monthly Coffee Production by Country',
-		vAxes: { 0: {title: 'ilk', format: '#.#', maxValue: 20}, 1: {title: 'aq',format: '#.#', minValue: -1, baselineColor:"#CCCCCC"} },
-		hAxis: {title: 'Month'},
-		seriesType: 'bars',
-		bar: {
-			groupWidth: 2
-		},
-		series: {
-			0:{ type: "bars", targetAxisIndex: 0 },
-			1:{ type: 'line', targetAxisIndex: 1}
+var options = {
+	vAxes: { 1: {title: 'Dose', format: '#.#', maxValue: 20}, 
+	0: {title: 'INR',format: '#.#', minValue: -1, baselineColor:"#CCCCCC"} },
+	hAxis: {title: 'Day'},
+	seriesType: 'bars',
+	bar: {
+		groupWidth: 2
+	},
+	series: {
+		0:{ type: "bars", targetAxisIndex: 1 },
+		1:{ type: 'line', targetAxisIndex: 0}
 
-		}
+	}
 };
+
 
 
 var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
 chart.draw(data, options);
+
 }
 </script>
-

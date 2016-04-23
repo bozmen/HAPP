@@ -238,4 +238,3 @@ class DoseAdvisor
 		end
 	end
 end
-end
