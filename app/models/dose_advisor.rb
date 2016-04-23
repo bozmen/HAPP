@@ -190,7 +190,7 @@ class DrugPrescription
 					elsif patient.desired_inr == "2.5-3.5"
 						"Recommended dosage for #{date + 1} is #{patient.initial_dose * 0.8}mg - #{patient.initial_dose * 0.9}mg"
 					end
-				else
+				end
 			end
 		elsif (patient.therapy_state == "weekly")
 			week = day/7
