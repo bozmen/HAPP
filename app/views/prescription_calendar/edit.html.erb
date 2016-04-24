@@ -1,22 +1,24 @@
+<style type="text/css">
+   .messages-scroll{
+      width: 100%;
+      height: 50px;
+      overflow: auto;
+   }
+</style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="container">
- <div class="row">
-   <div id="calendar" class="col-md-2" align="center">
-      <!-- PATIENTS OF DOCTOR -->
-      <h3>Patient List </h3>
-      <table class="table table-hover">
-         <% current_user.patients.each do |p| %>
-         <tr>
-            <td class="user-list" style="text-transform: capitalize;">  <%= link_to p.name + " " + p.surname, monitor_patient_path(current_user, p) %>  </td>
-         </tr>
-         <% end %>
-      </table>
-      <!-- PATIENTS OF DOCTOR -->
+   <div class="row">
+      <div class="col-md-12" align="center">
+         <h1>        <%= image_tag(@patient.avatar.url(:thumb), :style => "border-radius: 50%; height: 100px; width: 100px;" ) %>
+<%= @patient.fullname %> </h1>
+      </div>
    </div>
-   <div id="calendar" class="col-md-5" align="center">
-      <h3> Grafik </h3>
-   </div>
-   <div id="calendar" class="col-md-5">
-      <h2 id="month">
+   <div class="row">
+      <div class="col-md-6" align="center">
+         <%= render 'patients/graph' %>
+      </div>
+      <div id="calendar" class="col-md-6">
+         <h2 id="month">
          <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
          <%=h @date.strftime("%B %Y") %>
          <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
@@ -34,34 +36,31 @@
       </ul>
       <% end %>
       <% end %>
+      <%= link_to "Back", monitor_patient_path(current_user, @patient), class: "btn btn-default", style: "width: 100%" %>
+
+      </div>
    </div>
-   <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-   <p>Add Prescription</p>
-   <%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
-   <%= f.label :dosage %>
-   <%= f.number_field :dosage, :step => '0.5' %>
-   <%= f.label :date %>
-   <%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker' %> 
-   <%= f.submit "Add Drug Prescription", class: "btn btn-default" %>
-   <% end %>
-   <!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-   <!-- HASTA PRESCRIPTIONS -->
-   <table class="table table-hover">
-      <thead>
-         <tr>
-            <th>Value</th>
-            <th>Date</th>
-            <th></th>
-         </tr>
-      </thead>
-      <% @drug_prescriptions.each do |dp| %>
-      <tr>
-         <td>	<%= "#{dp.dosage} " %> </td>
-         <td><%= "#{dp.date}" %></td>
-         <td><%= link_to "Delete", delete_prescription_path(current_user, dp), method: "delete" %> </td>
-      </tr>
-      <% end %>
-   </table>
-   <!-- HASTA PRESCRIPTIONS -->
+
+   <!-- RECOMMENDATION -->
+   <div class="col-md-6">
+      <hr/>
+      <div class="panel with-nav-tabs panel-default">
+         <div class="panel-heading">
+            <ul class="nav nav-tabs">
+               <li class="active"><a href="#tab1default" data-toggle="tab">Recommendation</a></li>
+            </ul>
+         </div>
+         <div class="panel-body">
+            <div class="tab-content">
+               <div class="tab-pane fade active in" id="tab1default">
+                  <%= DoseAdvisor.advise(@patient) %>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- RECOMMENDATION -->
+   
 </div>
 </div>
+
