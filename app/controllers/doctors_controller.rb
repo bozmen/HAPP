@@ -13,6 +13,7 @@ class DoctorsController < ApplicationController
 	def create
 		@doctor = Doctor.new(signup_params)
 		if @doctor.save 
+			log_in @doctor, "doctor"
 			redirect_to @doctor
 		else
 			flash[:danger] = "Account could not be created."
