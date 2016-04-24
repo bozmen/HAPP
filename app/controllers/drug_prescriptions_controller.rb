@@ -1,6 +1,6 @@
 class DrugPrescriptionsController < ApplicationController
 	def create
-		patient = Patient.find(params[:id])
+		patient = Patient.find(params[:patient_id])
 		drug = DrugPrescription.new(create_params)
 		if drug.save
 			# başarılı oldu diye flash bas

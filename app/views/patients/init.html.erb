@@ -2,12 +2,29 @@
    <div class="row">
    <div class="col-xs-12 col-sm-4"></div>
 	  <div class="col-xs-12 col-sm-4">
+	  		<table class="risk-table">
+	  			<tr>
+	  				<td class="risk-definition" align="center">
+	  					<ul class="list-group">
+		  				<p>+ Age >60 years old</p>
+						<p>+ Impaired nutritional status or low BMI</p>
+						<p>+ Congestive heart failure</p>
+						<p>+ Liver disease (Child-Pugh Grade B/C)</p>
+						<p>+ Taking medications known to increase warfarin activity or increase bleeding risk</p>
+						<p>+ Recent major surgery or high risk of bleeding </p>
+						</ul>
+					</td>
+	  				<td class="risk-name" align="center">
+		  				High risk
+	  				</td>
+	  			</tr>
+	  		</table>
 			<%= form_for @patient, url: set_init_patient_path(current_user, @patient) do |f| %>
 				<label> Risk </label>
-				<%= f.select :risk,  Patient.risks.keys.to_a, required: true,  id: "risk-select"%>
+				<%= f.select :risk,  Patient.risks.keys.to_a,{},{required: true,  class: "selectpicker form-control" , style: "display: inline-block!important; width:100%;"}%>
 
-				<label> desired_inr </label>
-				<%= f.select :desired_inr, Patient.desired_inrs.keys.to_a, required: true, class: "form-control", :style => "width:100%;" %>
+				<label> Desired INR </label>
+				<%= f.select :desired_inr, Patient.desired_inrs.keys.to_a,{},{required: true, class: "selectpicker form-control" , style: "display: inline-block!important; width:100%;"} %>
 
 				<label class="sr-only"> desired_inr </label>
 				<%= f.number_field :initial_dose, :step => '0.5', required: true, class: "form-control"  %>

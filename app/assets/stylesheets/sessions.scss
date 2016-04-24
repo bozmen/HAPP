@@ -57,3 +57,22 @@ body {
 .emergency:hover{
   background: #FF6666!important ;
 }
+
+.risk-definition{
+  width: 60%;
+}
+
+.risk-name{
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.risk-table{
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.risk-definition{
+  border-right: 1px solid #dedede;
+  padding: 5px;
+}
