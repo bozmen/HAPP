@@ -13,6 +13,12 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-turbolinks'
 
+# paperclip
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+#aws sdk
+gem 'aws-sdk-v1'
+gem 'aws-sdk', '~>2'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -30,6 +36,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem "watu_table_builder", :require => "table_builder"
 
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-filestyle-rails'
 
 
 # Use Unicorn as the app server

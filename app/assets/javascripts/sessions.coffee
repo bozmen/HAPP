@@ -4,3 +4,4 @@
 $ ->
   $('.datepicker').datepicker
   	format: 'dd/mm/yyyy'
+  $(':file').filestyle input: false

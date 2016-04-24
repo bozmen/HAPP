@@ -69,7 +69,7 @@ class PatientsController < ApplicationController
 
 	private
 	def update_params
-		params.require(:patient).permit(:name, :surname, :email, :birthday, :password, :password_confirmation)
+		params.require(:patient).permit(:name, :surname, :email, :birthday, :password, :password_confirmation, :avatar)
 	end
 
 	private

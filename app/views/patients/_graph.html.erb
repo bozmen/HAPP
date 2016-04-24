@@ -15,7 +15,6 @@ $(function () {
 		data.addColumn('number', 'INR');
 		data.addColumn('number', 'Dosage');
 		data.addRows(<%= DrugInr.generate_array(@patient) %>);
-		//arrayToDataTable(<%= DrugInr.generate_array(@patient) %>);
 
 		var options = {
 			vAxes: { 1: {title: 'Dose', format: '#.#', maxValue: 20}, 
@@ -23,14 +22,13 @@ $(function () {
 			hAxis: {title: 'Day'},
 			seriesType: 'bars',
 			bar: {
-				groupWidth: 2
+				groupWidth: 5
 			},
 			series: {
 				0:{ type: "bars", targetAxisIndex: 1 },
 				1:{ type: 'line', targetAxisIndex: 0}
 
-			},
-			interpolateNulls: true
+			}
 	};
 
 

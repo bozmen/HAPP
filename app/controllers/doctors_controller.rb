@@ -87,6 +87,6 @@ class DoctorsController < ApplicationController
 
 	private
 	def update_params
-		params.require(:doctor).permit(:name, :surname, :email, :birthday, :password, :password_confirmation)
+		params.require(:doctor).permit(:name, :surname, :email, :birthday, :password, :password_confirmation, :avatar)
 	end
 end

@@ -11,15 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420203038) do
+ActiveRecord::Schema.define(version: 20160424155659) do
 
   create_table "doctors", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "name"
     t.string   "surname"
     t.string   "password_digest"
     t.string   "email"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "drug_prescriptions", force: :cascade do |t|
@@ -39,8 +43,8 @@ ActiveRecord::Schema.define(version: 20160420203038) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "name"
     t.string   "surname"
     t.string   "password_digest"
@@ -49,8 +53,12 @@ ActiveRecord::Schema.define(version: 20160420203038) do
     t.integer  "doctor_id"
     t.integer  "risk"
     t.integer  "desired_inr"
-    t.decimal  "initial_dose",    precision: 3, scale: 1
+    t.decimal  "initial_dose",        precision: 3, scale: 1
     t.integer  "therapy_state"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-filestyle
 //= require_tree .
