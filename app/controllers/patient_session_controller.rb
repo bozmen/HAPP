@@ -1,5 +1,7 @@
 class PatientSessionController < ApplicationController
 	include SessionsHelper
+	before_action :require_logout, only: :new
+
 
 	def new
 		if logged_in?

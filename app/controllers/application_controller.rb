@@ -37,4 +37,10 @@ class ApplicationController < ActionController::Base
       redirect_to current_user
     end
   end
+
+  def require_logout
+    if logged_in?
+      redirect_to current_user
+    end
+  end
 end
