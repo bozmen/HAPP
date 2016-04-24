@@ -61,8 +61,10 @@
 }
 
 #calendar .today {
-  background-color: #D7F2FF;
+  background-color: #D7F2AF;
 }
+
+
 
 #calendar ul {
   margin: 0;

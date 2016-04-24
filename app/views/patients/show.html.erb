@@ -54,14 +54,17 @@
             </tr>
           </thead>
           <% @inr_records.each do |ir| %>
+
           <tr>
             <td>  <%= "#{ir.inr_value} " %> </td>
             <td><%= "#{ir.date}" %></td>
             <td><%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %></td>
           </tr>
+
           <% end %>
         </table>
       </div>
+
 
     </div>
   </div>
