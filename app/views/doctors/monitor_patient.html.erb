@@ -28,23 +28,72 @@
 			</ul>
 			<% end %>
 			<% end %>
+
+			<!-- takvim edit butonu -->
+			<%= link_to "Edit Calendar", edit_prescription_calendar_path(current_user, @patient), class: "btn btn-default", style: "width: 100%" %>
+			<!-- takvim edit butonu -->
 		</div>
+	</div>
+
+	<!-- RECOMMENDATION -->
+	<div class="col-md-6">
+		<hr/>
+		<div class="panel with-nav-tabs panel-default">
+			<div class="panel-heading">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab1default" data-toggle="tab">Recommendation</a></li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="tab-pane fade active in" id="tab1default">
+						<%= DoseAdvisor.advise(@patient) %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- RECOMMENDATION -->
+	<!-- MESSAGES -->
+	<div class="col-md-6">
+		<hr/>
+		<div class="panel with-nav-tabs panel-default">
+			<div class="panel-heading">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab1default" data-toggle="tab">Messages</a></li>
+				</ul>
+			</div>
+			<div class="panel-body" style="background-color: #FFF;">
+				<div class="tab-content">
+					<div class="tab-pane fade active in messages-scroll" id="tab1default">Mesajlar
+						Mesajlar
+						<br/>
+						Mesajlar
+						Mesajlar
+						<br/>
+						Mesajlar
+						Mesajlar
+						<br/>
+						Mesajlar
+						Mesajlar
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MESSAGES -->
+	<div class="col-md-12">
 		<!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-		<div class="col-md-12">
-			<p>Add Prescription</p>
-			<%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
-			<%= f.label :dosage %>
-			<%= f.number_field :dosage, :step => '0.5', required: true %>
-			<%= f.label :date %>
-			<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker', required: true %> 
-			<%= f.submit "Add Drug Prescription", class: "btn btn-default" %>
-			<% end %>
-			<!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
-			<!-- takvim edit butonu -->
-			<%= link_to "Edit Calendar", edit_prescription_calendar_path(current_user, @patient) %>
-			<!-- takvim edit butonu -->
-			<!-- HASTA PRESCRIPTIONS -->
-		</div>
+		<p>Add Prescription</p>
+		<%= form_for @drug, url: create_prescription_path(current_user, @patient) do |f| %>
+		<%= f.label :dosage %>
+		<%= f.number_field :dosage, :step => '0.5', required: true %>
+		<%= f.label :date %>
+		<%= f.text_field :date, 'data-provide': 'datepicker', class: 'datepicker', required: true %> 
+		<%= f.submit "Add Drug Prescription", class: "btn btn-default" %>
+		<% end %>
+		<!-- HASTA PRESCRIPTION EKLEME ŞEYSİ -->
+		<!-- HASTA PRESCRIPTIONS -->
 		<div class="col-md-12">
 			<hr/>
 			<table class="table table-hover">
@@ -65,52 +114,8 @@
 			</table>
 		</div>
 		<!-- HASTA PRESCRIPTIONS -->
-		<!-- RECOMMENDATION -->
-		<div class="col-md-6">
-			<hr/>
-			<div class="panel with-nav-tabs panel-default">
-				<div class="panel-heading">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1default" data-toggle="tab">Recommendation</a></li>
-					</ul>
-				</div>
-				<div class="panel-body">
-					<div class="tab-content">
-						<div class="tab-pane fade active in" id="tab1default">
-							<%= DoseAdvisor.advise(@patient) %>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- RECOMMENDATION -->
-		<!-- MESSAGES -->
-		<div class="col-md-6">
-			<hr/>
-			<div class="panel with-nav-tabs panel-default">
-				<div class="panel-heading">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1default" data-toggle="tab">Messages</a></li>
-					</ul>
-				</div>
-				<div class="panel-body" style="background-color: #FFF;">
-					<div class="tab-content">
-						<div class="tab-pane fade active in messages-scroll" id="tab1default">Mesajlar
-							Mesajlar
-							<br/>
-							Mesajlar
-							Mesajlar
-							<br/>
-							Mesajlar
-							Mesajlar
-							<br/>
-							Mesajlar
-							Mesajlar
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- MESSAGES -->
+
+
 	</div>
+</div>
 </div>
