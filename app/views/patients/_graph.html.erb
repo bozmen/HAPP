@@ -12,8 +12,8 @@ $(function () {
 		// Some raw data (not necessarily accurate)
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Date');
-		data.addColumn('number', 'INR');
 		data.addColumn('number', 'Dosage');
+		data.addColumn('number', 'INR');
 		data.addRows(<%= DrugInr.generate_array(@patient) %>);
 
 		var options = {
