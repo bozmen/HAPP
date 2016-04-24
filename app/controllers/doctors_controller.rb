@@ -1,5 +1,9 @@
 class DoctorsController < ApplicationController
+	before_action :require_login, only: [:show, :update, :edit, :add_patient, :delete_patient, :monitor_patient]
 	before_action :require_init, only: :monitor_patient
+	before_action :require_doctor_login, only: [:show, :edit, :update, :add_patient, :delete_patient, :monitor_patient]
+	before_action :require_patient_ownership, only: [:delete_patient, :monitor_patient]
+
 
 	def show
 	end

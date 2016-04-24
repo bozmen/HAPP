@@ -1,5 +1,10 @@
 class PatientsController < ApplicationController
 	include SessionsHelper
+	before_action :require_login, only: [:show, :init, :set_init, :edit, :update]
+	before_action :require_patient_login, only: [:show, :edit, :update]
+	before_action :require_doctor_login, only: [:init, :set_init]
+	before_action :require_patient_ownership, only: [:init, :set_init]
+
 
 	def show
 		@inr = InrRecord.new

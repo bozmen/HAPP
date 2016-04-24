@@ -12,15 +12,18 @@ class DrugInr
 			if(!(i_el.empty?))
 				to_add[2] = i_el.first.inr_value.to_f
 			else
-				to_add[2] = nil
+				to_add[2] = 0
 			end
 			d_el = d.where(date: date)
 			if(!(d_el.empty?))
 				to_add[1] = d_el.first.dosage.to_f
 			else
-				to_add[1] = nil
+				to_add[1] = 0
 			end
 			results << to_add
+		end
+		if results.size == 1
+			results << [Date.today().strftime("%d/%m"), 0, 0]
 		end
 		return results.to_json.html_safe
 	end

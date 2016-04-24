@@ -10,4 +10,31 @@ class ApplicationController < ActionController::Base
   		redirect_to init_patient_path(current_user, patient)
   	end
   end
+
+  def require_doctor_login
+    if (current_user.class.name.downcase  != "doctor" || params[:id].to_i != current_user.id)
+      flash[:danger] = "You are not authorized to see here."
+      redirect_to current_user
+    end
+  end
+
+  def require_patient_login
+    if (current_user.class.name.downcase != "patient" || params[:id].to_i != current_user.id)
+      flash[:danger] = "You are not authorized to see here."
+      redirect_to current_user
+    end
+  end
+
+  def require_login
+    unless logged_in?
+      redirect_to root_path
+    end
+  end
+
+  def require_patient_ownership
+    patient = Patient.find(params[:patient_id])
+    unless patient.doctor == current_user
+      redirect_to current_user
+    end
+  end
 end
