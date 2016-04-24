@@ -3,7 +3,7 @@ class DrugInr
 		d = patient.drug_prescriptions.order(:date)
 		i = patient.inr_records.order(:date)
 		results = []
-		results << ['Day', 'Dose',  'INR']
+		# results << ['Day', 'Dose',  'INR']
 		dates = (d.map(&:date) | i.map(&:date)).sort
 		dates.each do |date|
 			to_add = []
@@ -12,18 +12,15 @@ class DrugInr
 			if(!(i_el.empty?))
 				to_add[2] = i_el.first.inr_value.to_f
 			else
-				to_add[2] = 0
+				to_add[2] = nil
 			end
 			d_el = d.where(date: date)
 			if(!(d_el.empty?))
 				to_add[1] = d_el.first.dosage.to_f
 			else
-				to_add[1] = 0
+				to_add[1] = nil
 			end
 			results << to_add
-		end
-		if results.size == 1
-			results << [Date.today().strftime("%d/%m"), 0, 0]
 		end
 		return results.to_json.html_safe
 	end
