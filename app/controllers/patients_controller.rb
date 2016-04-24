@@ -64,6 +64,18 @@ class PatientsController < ApplicationController
 	    end
 	end
 
+	def issue_emergency
+		patient = current_user
+		if patient.doctor
+			flash[:success] = "Emergency has been issued successfully."
+			SendEmergencyMailJob.perform_later patient.doctor, patient
+			redirect_to current_user
+		else
+			flash[:danger] = "You do not have a doctor."
+			redirect_to current_user
+		end
+	end
+
 	private
 	def signup_params
 		params.require(:patient).permit(:name, :surname, :email, :password, :password_confirmation)

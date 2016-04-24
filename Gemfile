@@ -38,6 +38,9 @@ gem "watu_table_builder", :require => "table_builder"
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-filestyle-rails'
 
+# worker
+gem 'delayed_job_active_record'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
