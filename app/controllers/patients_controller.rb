@@ -10,6 +10,7 @@ class PatientsController < ApplicationController
 		@inr = InrRecord.new
 		@inr_records = current_user.inr_records
 		@patient = current_user
+		@date = params[:month] ? Date.parse(params[:month].gsub('-', '/')) : Date.today
 	end
 
 	def new
