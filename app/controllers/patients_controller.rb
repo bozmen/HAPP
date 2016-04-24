@@ -4,6 +4,7 @@ class PatientsController < ApplicationController
 	def show
 		@inr = InrRecord.new
 		@inr_records = current_user.inr_records
+		@patient = current_user
 	end
 
 	def new
