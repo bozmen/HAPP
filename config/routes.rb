@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   post   'login'         => 'sessions#create',      as: :login
   delete 'logout'         => 'sessions#destroy',    as: :logout
   #   resources :products
-  resources :patients, :doctors
+  resources :patients
+  resources :doctors
 
   
   # Example resource route with options:

@@ -4,7 +4,6 @@
 		</div>
 		<div class="col-xs-12 col-sm-6">
   	<%= form_for @doctor, url: doctor_path(@doctor) do |f| %>
-  	<%= render 'shared/doctor_error_messages' %>
   	<%# form_for(:session, url: login_path, html: {class: "form-signin"}) do |f| %>
   	<h2 class="form-signin-heading" style="text-transform: capitalize;"><%= current_user.name +  " " + current_user.surname %> - Profile Edit</h2>
   	<label class="sr-only"> Name </label>

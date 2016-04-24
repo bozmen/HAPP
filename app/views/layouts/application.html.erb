@@ -37,9 +37,9 @@
               <ul class="dropdown-menu">
                 <li>
                   <% if session[:user_type] == 'patient' %>
-                    <%= link_to_if(session[:user_type] == 'patient', "Edit Profile", edit_patient_path(:id => current_user)) %>
+                    <%= link_to_if(session[:user_type] == 'patient', "Edit Profile", edit_patient_path(current_user.id)) %>
                   <% elsif session[:user_type] == 'doctor' %>
-                    <%= link_to_if(session[:user_type] == 'doctor', "Edit Profile", edit_doctor_path(:id => current_user)) %>
+                    <%= link_to_if(session[:user_type] == 'doctor', "Edit Profile", edit_doctor_path(current_user.id)) %>
                   <% end %>
                 </li>  
                 <li>
