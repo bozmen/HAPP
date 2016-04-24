@@ -43,6 +43,12 @@ body {
   border-top-right-radius: 0;
 }
 
-#calendar{
+.emergency{
+  background: red;
+  color: white!important;
+  font-weight: bold;
+}
 
+.emergency:hover{
+  background: #FF6666!important ;
 }

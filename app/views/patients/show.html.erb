@@ -7,38 +7,64 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="container">
   <div class="row">
-    <div class="col-md-6" align="center">
-      <%= render 'patients/graph' %>
+    <div class="col-md-12" align="center">
+      <h1>      <%= image_tag(@patient.avatar.url(:thumb), :style => "border-radius: 50%; height: 100px; width: 100px;" ) %>
+        <%= @patient.fullname %> </h1>
     </div>
-    <div class="col-md-6">
-      <h3>Add INR Record</h3>
-       <div class="row">
-      <%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
-      <%= f.label :inr_value %>
-      <%= f.number_field :inr_value, :step => '0.1', class: "form-control" %>
-      <%= f.label :date %>
-      <%= f.text_field :date, 'data-provide': 'datepicker', class: 'form-control datepicker' %> 
-      <%= f.submit "Add INR Record", class: "btn btn-default", style: "margin-top: -4px;" %>
-      <% end %>
-    </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Value</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <% @inr_records.each do |ir| %>
-        <tr>
-          <td>  <%= "#{ir.inr_value} " %> </td>
-          <td><%= "#{ir.date}" %></td>
-          <td><%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %></td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
-    
-
   </div>
-</div>
+
+    <div class="row">
+      <div id="calendar" class="col-md-6">
+        <h2 id="month">
+          <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+          <%=h @date.strftime("%B %Y") %>
+          <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+        </h2>
+        <%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
+        <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+        <%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
+        <%= date.day %>
+        <ul>
+          <% for drug_prescription in drug_prescriptions %>
+          <li> <%= drug_prescription.dosage %> </li>
+          <% end %>
+        </ul>
+        <% end %>
+        <% end %>
+      </div>
+
+      <div class="col-md-6" align="center">
+        <%= render 'patients/graph' %>
+      </div>
+      <div class="col-md-6">
+        <h3>Add INR Record</h3>
+        <%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
+        <%= f.label :inr_value %>
+        <%= f.number_field :inr_value, :step => '0.1', class: "form-control" %>
+        <%= f.label :date %>
+        <%= f.text_field :date, 'data-provide': 'datepicker', class: 'form-control datepicker' %> 
+        <%= f.submit "Add INR Record", class: "btn btn-default", style: "margin-top: -4px;" %>
+        <% end %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Value</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @inr_records.each do |ir| %>
+
+          <tr>
+            <td>  <%= "#{ir.inr_value} " %> </td>
+            <td><%= "#{ir.date}" %></td>
+            <td><%= link_to "Delete", delete_inr_path(current_user, ir), method: "delete" %></td>
+          </tr>
+
+          <% end %>
+        </table>
+      </div>
+
+
+    </div>
+  </div>

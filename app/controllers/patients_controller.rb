@@ -10,6 +10,8 @@ class PatientsController < ApplicationController
 		@inr = InrRecord.new
 		@inr_records = current_user.inr_records
 		@patient = current_user
+		@date = params[:month] ? Date.parse(params[:month].gsub('-', '/')) : Date.today
+		@drug_prescriptions = @patient.drug_prescriptions
 	end
 
 	def new
@@ -60,6 +62,18 @@ class PatientsController < ApplicationController
 	    	flash[:danger]  = "Your profile could not be updated."
 	    	redirect_to edit_patient_path
 	    end
+	end
+
+	def issue_emergency
+		patient = current_user
+		if patient.doctor
+			flash[:success] = "Emergency has been issued successfully."
+			SendEmergencyMailJob.perform_later patient.doctor, patient
+			redirect_to current_user
+		else
+			flash[:danger] = "You do not have a doctor."
+			redirect_to current_user
+		end
 	end
 
 	private

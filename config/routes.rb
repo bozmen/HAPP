@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   get    'patients/login' => 'patient_session#new',                   as: :patient_login
   post   'patients/:id/create_inr' => 'inr_records#create',           as: :create_inr
+  post   'patients/:id/issue_emergency' => 'patients#issue_emergency',as: :issue_emergency
   delete 'patients/:id/delete_inr/:inr_id' => 'inr_records#destroy',  as: :delete_inr
 
 
@@ -35,7 +36,8 @@ Rails.application.routes.draw do
   post   'login'         => 'sessions#create',      as: :login
   delete 'logout'         => 'sessions#destroy',    as: :logout
   #   resources :products
-  resources :patients, :doctors
+  resources :patients
+  resources :doctors
 
   
   # Example resource route with options:
