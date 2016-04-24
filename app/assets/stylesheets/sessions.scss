@@ -3,9 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
+  font-family: 'Work Sans', sans-serif!important;
   padding-top: 70px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-image: image-url("BACKGROUND.png");
+}
+
+.navbar {
+  background: #0F102D; 
 }
 
 .form-signin {

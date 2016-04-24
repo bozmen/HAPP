@@ -15,11 +15,12 @@
 
     <div class="row">
       <div id="calendar" class="col-md-6">
-        <h2 id="month">
+        <h2 align="center"> Drug Prescription Calendar </h2>
+        <h3 id="month">
           <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
           <%=h @date.strftime("%B %Y") %>
           <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
-        </h2>
+        </h3>
         <%= calendar_for @drug_prescriptions, :year => @date.year, :month => @date.month do |calendar| %>
         <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
         <%= calendar.day(:day_method => :date) do |date,drug_prescriptions| %>
@@ -36,7 +37,7 @@
       <div class="col-md-6" align="center">
         <%= render 'patients/graph' %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-12">
         <h3>Add INR Record</h3>
         <%= form_for @inr, url: create_inr_path(current_user, @inr) do |f| %>
         <%= f.label :inr_value %>
