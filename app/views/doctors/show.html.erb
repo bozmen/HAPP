@@ -1,6 +1,14 @@
 <div class="container">
    <div class="row">
-      <div class="col-md-4">
+    <div class="col-md-12" align="center">
+      <h1>      <%= image_tag(current_user.avatar.url(:thumb), :style => "border-radius: 50%; height: 100px; width: 100px;" ) %>
+        <%= current_user.fullname %> </h1>
+    </div>
+  </div>
+   <div class="row">
+      <div class="col-md-2" align="center">
+      </div>
+      <div class="col-md-8">
          <%= form_for(:patient, url: add_patient_path) do |f| %>
          <%= f.select :email, options_for_select(Patient.all.collect{|x| [x.fullname, x.email]}), {}, {required: true,  class: "selectpicker form-control", style: "display: inline-block!important; width:70%;"}%>
          <%= f.submit "Add patient", class: "btn btn-default", style: "margin-top: -4px;" %>
@@ -16,11 +24,7 @@
             <% end %>
          </table>
       </div>
-      <div id="calendar" class="col-md-5" align="center">
-         GRAFIK
-      </div>
-      <div id="calendar" class="col-md-2" align="center">
-         HASTA LISTESI
+      <div class="col-md-2" align="center">
       </div>
    </div>
 </div>
